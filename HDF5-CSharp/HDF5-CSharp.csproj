@@ -22,7 +22,7 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageReleaseNotes></PackageReleaseNotes>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>1.11.2.0-rc</Version>
+		<Version>1.11.2.1-rc</Version>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
@@ -56,7 +56,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="HDF.PInvoke.1.10" Version="1.10.611" />
+		<PackageReference Include="System.ValueTuple" Version="4.3.0" />
 		<PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.0.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -67,7 +67,12 @@
 		</PackageReference>
 		<PackageReference Include="System.Resources.Extensions" Version="5.0.0" />
 	</ItemGroup>
-
+	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+		<PackageReference Include="HDF.PInvoke.1.10" Version="1.10.611" />
+		</ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net461'">
+		<PackageReference Include="HDF.PInvoke" Version="1.10.6.1" />
+	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\hdf5Wrapper.png">
 			<Pack>True</Pack>
