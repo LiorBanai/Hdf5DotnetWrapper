@@ -13,8 +13,7 @@ namespace HDF5CSharp.UnitTests.Core
         {
             public string noAttributeName = "empty;";
 
-            [Hdf5("some money")]
-            public decimal money = 100.12M;
+            [Hdf5("some money")] public decimal money = 100.12M;
 
             public bool Equals(InnerClass other)
             {
@@ -53,9 +52,16 @@ namespace HDF5CSharp.UnitTests.Core
 
             public override int GetHashCode()
             {
-                return HashCode.Combine(noAttributeName, money);
+                unchecked
+                {
+                    int result = (noAttributeName != null ? noAttributeName.GetHashCode() : 0);
+                    result = (result * 397) ^ (money.GetHashCode());
+                    return result;
+                }
+
             }
         }
+
         [Hdf5("birthdate")]
         public DateTime datetime;
         public double noAttribute = 10.0;
@@ -108,7 +114,19 @@ namespace HDF5CSharp.UnitTests.Core
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(datetime, noAttribute, inner, StringProperty);
+            unchecked
+            {
+                int result = (inner != null) ? inner.GetHashCode() : 0;
+                result = (result * 397) ^ (datetime.GetHashCode());
+                result = (result * 397) ^ (noAttribute.GetHashCode());
+                if (!string.IsNullOrEmpty(StringProperty))
+                {
+                    result = (result * 397) ^ (StringProperty.GetHashCode());
+
+                }
+                return result;
+            }
+
         }
     }
     [Hdf5Attributes(new[] { "some info", "more info" })]
@@ -181,7 +199,7 @@ namespace HDF5CSharp.UnitTests.Core
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 5)]
         public string label;
     }
-   
+
     [StructLayout(LayoutKind.Sequential)]
     public struct WData3
     {
@@ -401,8 +419,6 @@ namespace HDF5CSharp.UnitTests.Core
 
             return Equals((TestClassWithJaggedArray)obj);
         }
-
-        public override int GetHashCode() => HashCode.Combine(dataField, Data);
     }
 
     class TestClassListOfList
@@ -413,7 +429,7 @@ namespace HDF5CSharp.UnitTests.Core
         public TestClassListOfList()
         {
             Data = new List<int[]>(2) { new[] { 1 }, new[] { 1, 2 } };
-            dataField = new List<int[]>(21) { new[] { 2 }, new[] { 4, 5} };
+            dataField = new List<int[]>(21) { new[] { 2 }, new[] { 4, 5 } };
         }
     }
     class TestClassWithLists : IEquatable<TestClassWithLists>
@@ -439,7 +455,7 @@ namespace HDF5CSharp.UnitTests.Core
             NumbersProperty = new List<int> { 4, 5, 6 };
             floats = new List<TestClassWithArrayOfFloats> { new TestClassWithArrayOfFloats(1f), new TestClassWithArrayOfFloats(2) };
 
-              FloatsProperties = new List<TestClassWithArrayOfFloats> { new TestClassWithArrayOfFloats(3f), new TestClassWithArrayOfFloats(4) };
+            FloatsProperties = new List<TestClassWithArrayOfFloats> { new TestClassWithArrayOfFloats(3f), new TestClassWithArrayOfFloats(4) };
         }
 
         public bool Equals(TestClassWithLists other)
