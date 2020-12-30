@@ -4,6 +4,7 @@
     <TargetFrameworks>netcoreapp3.1;net461</TargetFrameworks>
     <RootNamespace>HDF5CSharp.Example</RootNamespace>
     <AssemblyName>HDF5CSharp.Example</AssemblyName>
+    <Platforms>AnyCPU;x64;x86</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
