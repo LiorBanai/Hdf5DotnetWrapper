@@ -12,6 +12,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="HDF5-CSharp" Version="1.11.1" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
@@ -25,7 +26,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HDF5-CSharp.Example\HDF5-CSharp.Example.csproj" />
-    <ProjectReference Include="..\HDF5-CSharp\HDF5-CSharp.csproj" />
   </ItemGroup>
 
   <ItemGroup>

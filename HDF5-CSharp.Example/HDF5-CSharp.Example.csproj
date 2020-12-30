@@ -7,14 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="HDF5-CSharp" Version="1.11.1" />
     <PackageReference Include="MessagePack" Version="2.2.85" />
     <PackageReference Include="MessagePack.UnityShims" Version="2.2.85" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\HDF5-CSharp\HDF5-CSharp.csproj" />
-  </ItemGroup>
-
 </Project>
